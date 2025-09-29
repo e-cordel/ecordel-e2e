@@ -8,7 +8,7 @@ test('has title', async ({ page }) => {
 });
 
 test('input test', async ({ page }) => {
-  await page.goto('https://ler.ecordel.com.br');
+  await page.goto('https://ler.ecordel.com.br')
 
   //selecionar o input
   const input = page.locator('input[placeholder="Pesquisar cordel"]')
@@ -24,3 +24,29 @@ test('input test', async ({ page }) => {
   
 
 });
+
+//teste navegar para um cordel 
+test('navegar por um cordel', async ({page}) =>{
+  //acessar a página ler.ecordel.com.br
+  await page.goto('https://ler.ecordel.com.br')
+
+  //selecionar o input
+  const input = page.locator('input[placeholder="Pesquisar cordel"]')
+
+  //Digita no input
+  await input.fill("Oração da Menina Benigna")
+
+  const title = page.locator('span', {
+    hasText: 'Oração da Menina Benigna'
+  })
+  await expect(title).toBeVisible()
+
+  //clicar em um cordel
+  await page.locator('button:text("Visualizar")').click()
+
+  const cordel = page.locator('h3', {
+    hasText: 'Oração da Menina Benigna'
+  })
+
+  await expect(cordel).toBeVisible()
+})
