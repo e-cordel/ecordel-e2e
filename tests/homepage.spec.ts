@@ -50,3 +50,19 @@ test('navegar por um cordel', async ({page}) =>{
 
   await expect(cordel).toBeVisible()
 })
+
+test ('testar botao visualizar site', async ({page}) => {
+  await page.goto("https://ler.ecordel.com.br")
+
+  const botao = page.locator('button', {
+    hasText:"Visite nosso site"
+  })
+  
+  await botao.click()
+
+  await expect(page).toHaveURL("https://ecordel.com.br/")
+
+  const titulo = page.locator('h2:has-text("Cordel Para Todos")')
+
+  await expect(titulo).toBeVisible()
+})
