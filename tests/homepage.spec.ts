@@ -66,3 +66,12 @@ test ('testar botao visualizar site', async ({page}) => {
 
   await expect(titulo).toBeVisible()
 })
+
+test ('dark mode', async ({page}) => {
+  await page.goto("https://ler.ecordel.com.br")
+
+  await page.locator('[aria-label="Alterar esquema de cores"]').click()
+
+  await expect(page.locator('button').nth(0)).toHaveAttribute('class', /css-670439/)
+
+})
